@@ -11,4 +11,8 @@ router.put('/update/:id', staffController.updateStaff);
 // Delete a staff member by ID
 router.delete('/delete/:id', staffController.deleteStaff);
 
+// Get all staff members
+router.get('/staff', staffController.getAllStaffMembers);
+
+
 module.exports = router;

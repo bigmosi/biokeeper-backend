@@ -9,6 +9,7 @@ const staffSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  reportsTo: { type: String, default: null },
 });
 
 module.exports = mongoose.model('Staff', staffSchema);

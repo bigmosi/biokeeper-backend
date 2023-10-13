@@ -7,7 +7,9 @@ const staffRoutes = require('./routes/staffRoutes');
 
 const path = require('path');
 
-const PORT = 4000;
+require('dotenv').config({ path: './config/.env' });
+
+const PORT = process.env.PORT || 4000;
 const app = express();
 
 
@@ -18,7 +20,7 @@ app.use(cors());
 app.use('/api', staffRoutes);
 
 mongoose
-  .connect('mongodb://localhost:27017/schoolDB')
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Connected to MongoDB');
     app.listen(PORT, () => {

@@ -3,8 +3,8 @@ const Staff = require('../model/Staff');
 // Add a new staff member
 exports.addStaff = async (req, res) => {
   try {
-    const { name, role } = req.body;
-    const staff = new Staff({ name, role });
+    const { name, role, reportsTo } = req.body;
+    const staff = new Staff({ name, role, reportsTo });
     await staff.save();
     res.status(201).json(staff);
   } catch (error) {
@@ -16,7 +16,7 @@ exports.addStaff = async (req, res) => {
 exports.updateStaff = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, role } = req.body;
+    const { name, role, reportsTo } = req.body;
     const updatedStaff = await Staff.findByIdAndUpdate(
       id,
       { name, role },
@@ -42,5 +42,15 @@ exports.deleteStaff = async (req, res) => {
     res.json({ message: 'Staff member deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: 'Error deleting staff member' });
+  }
+};
+
+// Get all staff members
+exports.getAllStaffMembers = async (req, res) => {
+  try {
+    const staffMembers = await Staff.find();
+    res.status(200).json(staffMembers);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching staff members' });
   }
 };
